@@ -1,0 +1,108 @@
+body {
+	margin: 0;
+	padding:0;
+	background-color: black;
+	color:#ccc;
+	min-width: 800px;
+}
+#canvas {
+	z-index: -10;
+	width:100%;
+	height: 100%;
+	min-width: 800px;
+	min-height: 400px;
+	opacity: 0.5;
+	position: fixed;
+}
+#header {
+	z-index:10;
+	top:0;
+	background-color: black;
+	width:100%;
+	height:100px;
+	padding:10px 10px 10px 15px;
+	position: fixed;
+}
+#header > div, #header > span{
+	height: 20px;
+	margin-top: 2px;
+}
+#header > span, input {
+	display:none;
+}
+#header > #fatal-error {
+	display: inline-block;
+}
+#fatal-error, #header > label, #file-dropper {
+	font-size: 24px;
+} 
+#header > label {
+	text-decoration: underline;
+	cursor:pointer;
+	display: none;
+}
+
+#songs{
+	position: relative;
+	float:right;
+	width: 400px;
+	margin:10px;
+	top: 100px;
+}
+#songs > div {
+	display: block;
+	background-color: rgba(44,44,44,0.6);
+	margin:10px;
+	padding: 8px;
+	cursor:move;
+}
+#songs > div:hover {
+	background-color: rgba(0,0,0,0.6);
+}
+#songs > .over {
+	border: 1px solid #aaa;
+	background-color: #000;
+}
+#player {
+	position: fixed;
+	display: none;
+	margin:10px;
+	top: 100px;
+	text-align: center;
+	min-width: 400px;
+}
+#player > span {
+	display: block;
+}
+#player > div {
+	display: inline-block;
+}
+.play {
+	width: 50px;
+	height: 50px;
+	background: url('icons.png') no-repeat -100px 0;
+	margin:10px;
+}
+.play:hover {
+	background: url('icons.png') no-repeat -100px -50px;
+}
+.pause {
+	width: 50px;
+	height: 50px;
+	background: url('icons.png') no-repeat -50px 0;
+	margin:10px;
+}
+.pause:hover {
+	background: url('icons.png') no-repeat -50px -50px;
+}
+.stop {
+	width: 50px;
+	height: 50px;
+	background: url('icons.png') no-repeat 0 0;
+	margin:10px;
+	margin-left: 0px;
+}
+.stop:hover {
+	background: url('icons.png') no-repeat 0 -50px;
+}
+
