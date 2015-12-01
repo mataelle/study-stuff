@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<title>Презенташка</title>
+<link rel="stylesheet" href="styles.css" />
+        
+    
+<div id="impress">
+
+    <div id="overview" class="step" data-scale="2">
+    </div>
+    
+    <div id="new_bookmark_1" class="slide step" data-x="-700" data-y="-400" data-scale="0.25">
+        <h2>Презентация на джаваскрипте - </h2>
+        <p>это <strong>Прикольно!</strong></p>
+        <h1>ведь есть куча разных способов сделать необычные переходы</h1>
+    </div>
+
+    <div id="new_bookmark_2" class="slide2 step" data-x="-200" data-y="-300" data-rotate="90">
+        <h2>В нее можно вставить кучу необычных диаграмм</h2>
+        <p>Например, таких: </p>
+        <canvas id="editor-render-0" class="diagramm"></canvas>
+    </div>
+    
+    <div id="new_bookmark_3" class="slide step" data-x="700" data-y="-500" data-rotate="180">
+        <h2>Или вот таких:</h2>
+        <div id="editor-render-1" class="diagramm"> </div>
+    </div>
+    
+    <div id="new_bookmark_4" class="slide step" data-x="700" data-y="300" data-rotate="270">
+        <h2>И более того... </h2>
+        <div id="editor-render-2" class="diagramm"> </div>
+    </div>
+    
+    <div id="new_bookmark_5" class="slide step" data-x="0" data-y="400" data-rotate="0">
+        <h2>Но есть одно </h2>
+        <p><strong>Небольшое... </strong> Крохотное совсем но.</p>
+        <div id="editor-render-3" class="diagramm"> </div>
+    </div>
+    
+    <div id="new_bookmark_6" class="slide1 step" data-x="-900" data-y="250" data-rotate="90">
+        <h2>Не все работает без поднятого сервера</h2>
+        <p>Приятного освоения! :)</p>
+    </div>
+        
+</div>
+
+
+<!-- JavaScript includes -->
+<script src="impress.js"></script>
+<script src="flotr2.min.js"></script>
+<script src="jquery.min.js"></script>
+<script src="cytoscape.min.js"></script>
+<script src="Chart.js"></script>
+<script>impress().init();</script> 
+<script type="text/javascript"> 
+
+(function basic_pie(container) {
+
+  var
+    d1 = [[0, 99]],
+    d2 = [[0, 1]],
+    graph;
+  
+  graph = Flotr.draw(container, [
+    { data : d1, label : 'Плюсы' },
+    { data : d2, label : 'Но',
+      pie : {
+        explode : 50
+      }
+    },
+  ], {
+    HtmlText : false,
+    grid : {
+      verticalLines : false,
+      horizontalLines : false
+    },
+    xaxis : { showLabels : false },
+    yaxis : { showLabels : false },
+    pie : {
+      show : true, 
+      explode : 6
+    },
+    mouse : { track : true },
+    legend : {
+      position : 'se',
+      backgroundColor : '#D2E8FF'
+    }
+  });
+})(document.getElementById("editor-render-3"));
+
+(function basic_axis(container) {
+
+  var
+    d1 = [],
+    d2 = [],
+    d3 = [],
+    d5 = [],                       
+    ticks = [[ 0], 10, 20, 30, [400]], // Ticks for the Y-Axis
+    graph;
+        
+  for(var i = 0; i <= 10; i += 0.1){
+    d1.push([i, 4 + Math.pow(i,1.5)]);
+    d2.push([i, Math.pow(i,3)]);
+    d3.push([i, i*5+3*Math.sin(i*4)]);
+  }
+        
+  d3[30][1] = null;
+  d3[31][1] = null;
+
+  function ticksFn (n) { return '('+n+')'; }
+
+  graph = Flotr.draw(container, [ 
+      { data : d1, label : 'Адекватный человек', lines : { fill : true } }, 
+      { data : d2, label : 'Идеальный'}, 
+      { data : d3, label : 'Я'}, 
+      { data : d5, label : 'Четкий планировщик', lines : { show : true }, points : { show : true } }
+    ], {
+      xaxis : {
+      },
+      yaxis : {
+        // ticks : ticks,            // Set Y-Axis ticks
+        max : 40                  // Maximum value along Y-Axis
+      },
+      grid : {
+        verticalLines : false,
+        backgroundColor : '#D2E8FF'
+      },
+      legend : {
+        position : 'nw'
+      },
+      title : 'Люди и то, как они работают',
+      subtitle : 'Осторожно, преувеличено',
+  });
+})(document.getElementById("editor-render-1"));
+
+
+(function mad_arrows(container) {
+$(container).cytoscape({
+  layout: {
+    name: 'cose',
+    padding: 10
+  },
+  
+  style: cytoscape.stylesheet()
+    .selector('node')
+      .css({
+        'shape': 'data(faveShape)',
+        'width': 'mapData(weight, 40, 80, 20, 60)',
+        'content': 'data(name)',
+        'text-valign': 'center',
+        'text-outline-width': 2,
+        'text-outline-color': 'data(faveColor)',
+        'background-color': 'data(faveColor)',
+        'color': '#fff'
+      })
+    .selector(':selected')
+      .css({
+        'border-width': 3,
+        'border-color': '#333'
+      })
+    .selector('edge')
+      .css({
+        'opacity': 0.666,
+        'width': 'mapData(strength, 70, 100, 2, 6)',
+        'target-arrow-shape': 'triangle',
+        'source-arrow-shape': 'circle',
+        'line-color': 'data(faveColor)',
+        'source-arrow-color': 'data(faveColor)',
+        'target-arrow-color': 'data(faveColor)'
+      })
+    .selector('edge.questionable')
+      .css({
+        'line-style': 'dotted',
+        'target-arrow-shape': 'diamond'
+      })
+    .selector('.faded')
+      .css({
+        'opacity': 0.25,
+        'text-opacity': 0
+      }),
+  
+  elements: {
+    nodes: [
+      { data: { id: 'a', name: 'Apples', weight: 65, faveColor: '#6FB1FC', faveShape: 'triangle' } },
+      { data: { id: 'b', name: 'Bananas', weight: 45, faveColor: '#EDA1ED', faveShape: 'ellipse' } },
+      { data: { id: 'c', name: 'Cucumbers', weight: 75, faveColor: '#86B342', faveShape: 'octagon' } },
+      { data: { id: 'd', name: 'dates', weight: 70, faveColor: '#F5A45D', faveShape: 'rectangle' } }
+    ],
+    edges: [
+      { data: { source: 'a', target: 'c', faveColor: '#6FB1FC', strength: 90 } },
+      { data: { source: 'a', target: 'b', faveColor: '#6FB1FC', strength: 70 } },
+     
+      { data: { source: 'b', target: 'b', faveColor: '#EDA1ED', strength: 95 } },
+      { data: { source: 'b', target: 'd', faveColor: '#EDA1ED', strength: 60 }, classes: 'questionable' },
+      
+      { data: { source: 'с', target: 'c', faveColor: '#86B342', strength: 100 } },
+      { data: { source: 'c', target: 'a', faveColor: '#86B342', strength: 100 } },
+      { data: { source: 'c', target: 'b', faveColor: '#86B342', strength: 100 } },
+      
+      { data: { source: 'd', target: 'b', faveColor: '#F5A45D', strength: 90 } }
+    ]
+  },
+  
+  ready: function(){
+    window.cy = this;
+  }
+});
+
+})("#editor-render-2"); 
+
+
+</script>
+
+
+<script>
+(function bydlocod(container) {
+    console.log("adsfadsfasdf");
+    var data = {
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [
+        {
+            label: "My First dataset",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: [65, 59, 80, 81, 56, 55, 40]
+        },
+        {
+            label: "My Second dataset",
+            fillColor: "rgba(151,187,205,0.2)",
+            strokeColor: "rgba(151,187,205,1)",
+            pointColor: "rgba(151,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: [28, 48, 40, 19, 86, 27, 90]
+        }
+        ]
+    };
+    var ctx = $(container).get(0).getContext("2d");
+    var myLineChart = new Chart(ctx).Line(data);
+})("#editor-render-0");
+</script>

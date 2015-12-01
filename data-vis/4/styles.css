@@ -1,0 +1,14 @@
+body {
+	background-color: #eee;
+}
+strong {
+	font-size: 2em;
+	color:#eb9c00;
+}
+.step {
+	width:800px;
+}
+.diagramm{
+	height:400px;
+
+}
