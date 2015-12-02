@@ -6,7 +6,7 @@
     
 <div id="impress">
 
-    <div id="overview" class="step" data-scale="2">
+    <div id="overview" class="step" data-scale="4">
     </div>
     
     <div id="new_bookmark_1" class="slide step" data-x="-700" data-y="-400" data-scale="0.25">
@@ -15,29 +15,29 @@
         <h1>ведь есть куча разных способов сделать необычные переходы</h1>
     </div>
 
-    <div id="new_bookmark_2" class="slide2 step" data-x="-200" data-y="-300" data-rotate="90">
+    <div id="new_bookmark_2" class="slide step" data-x="-200" data-y="-300" data-rotate="90" data-scale="0.5" >
         <h2>В нее можно вставить кучу необычных диаграмм</h2>
         <p>Например, таких: </p>
         <canvas id="editor-render-0" class="diagramm"></canvas>
     </div>
     
-    <div id="new_bookmark_3" class="slide step" data-x="700" data-y="-500" data-rotate="180">
+    <div id="new_bookmark_3" class="slide step" data-x="700" data-y="-900" data-rotate="180" data-scale="1.5">
         <h2>Или вот таких:</h2>
         <div id="editor-render-1" class="diagramm"> </div>
     </div>
     
-    <div id="new_bookmark_4" class="slide step" data-x="700" data-y="300" data-rotate="270">
+    <div id="new_bookmark_4" class="slide step" data-x="900" data-y="300" data-rotate="90"  data-scale="1">
         <h2>И более того... </h2>
         <div id="editor-render-2" class="diagramm"> </div>
     </div>
     
-    <div id="new_bookmark_5" class="slide step" data-x="0" data-y="400" data-rotate="0">
+    <div id="new_bookmark_5" class="slide step" data-x="0" data-y="500" data-rotate="360">
         <h2>Но есть одно </h2>
         <p><strong>Небольшое... </strong> Крохотное совсем но.</p>
         <div id="editor-render-3" class="diagramm"> </div>
     </div>
     
-    <div id="new_bookmark_6" class="slide1 step" data-x="-900" data-y="250" data-rotate="90">
+    <div id="new_bookmark_6" class="slide step" data-x="-900" data-y="250" data-rotate="90">
         <h2>Не все работает без поднятого сервера</h2>
         <p>Приятного освоения! :)</p>
     </div>
@@ -94,7 +94,6 @@
     d1 = [],
     d2 = [],
     d3 = [],
-    d5 = [],                       
     ticks = [[ 0], 10, 20, 30, [400]], // Ticks for the Y-Axis
     graph;
         
@@ -113,7 +112,6 @@
       { data : d1, label : 'Адекватный человек', lines : { fill : true } }, 
       { data : d2, label : 'Идеальный'}, 
       { data : d3, label : 'Я'}, 
-      { data : d5, label : 'Четкий планировщик', lines : { show : true }, points : { show : true } }
     ], {
       xaxis : {
       },
@@ -184,11 +182,13 @@ $(container).cytoscape({
       { data: { id: 'a', name: 'Apples', weight: 65, faveColor: '#6FB1FC', faveShape: 'triangle' } },
       { data: { id: 'b', name: 'Bananas', weight: 45, faveColor: '#EDA1ED', faveShape: 'ellipse' } },
       { data: { id: 'c', name: 'Cucumbers', weight: 75, faveColor: '#86B342', faveShape: 'octagon' } },
-      { data: { id: 'd', name: 'dates', weight: 70, faveColor: '#F5A45D', faveShape: 'rectangle' } }
+      { data: { id: 'd', name: 'Dates', weight: 70, faveColor: '#F5A45D', faveShape: 'rectangle' } },
+      { data: { id: 'e', name: 'Yum!!', weight: 50, faveColor: '#A4F55D', faveShape: 'hexagon' } },
     ],
     edges: [
       { data: { source: 'a', target: 'c', faveColor: '#6FB1FC', strength: 90 } },
       { data: { source: 'a', target: 'b', faveColor: '#6FB1FC', strength: 70 } },
+      { data: { source: 'a', target: 'e', faveColor: '#6FB1FC', strength: 70 } },
      
       { data: { source: 'b', target: 'b', faveColor: '#EDA1ED', strength: 95 } },
       { data: { source: 'b', target: 'd', faveColor: '#EDA1ED', strength: 60 }, classes: 'questionable' },
@@ -196,6 +196,7 @@ $(container).cytoscape({
       { data: { source: 'с', target: 'c', faveColor: '#86B342', strength: 100 } },
       { data: { source: 'c', target: 'a', faveColor: '#86B342', strength: 100 } },
       { data: { source: 'c', target: 'b', faveColor: '#86B342', strength: 100 } },
+      { data: { source: 'c', target: 'e', faveColor: '#86B342', strength: 100 } },
       
       { data: { source: 'd', target: 'b', faveColor: '#F5A45D', strength: 90 } }
     ]
@@ -214,29 +215,28 @@ $(container).cytoscape({
 
 <script>
 (function bydlocod(container) {
-    console.log("adsfadsfasdf");
     var data = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: ["Сначала", "Чуть позже", "Потом", "еще чуть спустя", "после", "...", "напоследок"],
         datasets: [
         {
-            label: "My First dataset",
+            label: "1",
             fillColor: "rgba(220,220,220,0.2)",
             strokeColor: "rgba(220,220,220,1)",
             pointColor: "rgba(220,220,220,1)",
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 80, 81, 56, 55, 40]
+            data: [10, 40, 10, 20, 40, 20, 10]
         },
         {
-            label: "My Second dataset",
+            label: "2",
             fillColor: "rgba(151,187,205,0.2)",
             strokeColor: "rgba(151,187,205,1)",
             pointColor: "rgba(151,187,205,1)",
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
+            data: [10, 25, 50, 25, 10, 50, 10]
         }
         ]
     };
