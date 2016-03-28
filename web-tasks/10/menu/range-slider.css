@@ -1,0 +1,31 @@
+.rangeslider-base {
+    position: relative;
+    width: 200px;
+    height: 4px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #BDC3C7;
+}
+
+.rangeslider-handle-left, .rangeslider-handle-right {
+    position: absolute;
+    top: -8px;
+    width: 10px;
+    height: 20px;
+    background-color: #9b59b6;
+}
+
+.rangeslider-handle-left {
+    left: 0;
+}
+
+.rangeslider-handle-right {
+    right: 0;
+}
+
+.rangeslider-caption {
+    position: relative;
+    top: -20px;
+    font-size: 12px;
+    font-weight: bold;
+}

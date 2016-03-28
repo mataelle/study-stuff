@@ -1,0 +1,26 @@
+<title>Your Calendar</title>
+<meta charset="UTF8"/>
+<link rel = "stylesheet" href = "styles.css">
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+
+<div class="panel-up"> 
+	<div class="holder">
+		<div id="addEvent" class="btn"> Добавить </div>
+		<div id="refresh" class="btn"> Обновить </div>
+		<input type="text" id="search" placeholder="Cобытие, дата или участник">
+		<img/>
+	</div>
+</div>
+<div id="body-container"> 
+	<div class="holder"> 
+		<div class="pointer"> 
+			<img id="month-less"/>
+			<div class="month-year" id="month-year"> </div>
+			<img id="month-more"/>
+			<div class="btn-small" id="today">Сегодня</div>
+		</div>
+		<div class="table">
+		</div>
+	</div>
+</div>

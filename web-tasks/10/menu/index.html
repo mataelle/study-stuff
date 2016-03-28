@@ -1,0 +1,68 @@
+<title> Шаблон меню </title>
+<meta charset="utf8"/>
+
+<script type="text/javascript" src="jquery-2.1.4.min.js"> </script>
+<script type="text/javascript" src="jquery-ui.min.js"> </script>
+<script type="text/javascript" src="swig.min.js"> </script>
+<script type="text/javascript" src="range-slider.js"> </script>
+
+<link rel="stylesheet" href="styles.css"/>
+<link rel="stylesheet" href="range-slider.css"/>
+
+<div class="header"> 
+	<h1> Меню </h1>
+	<div class="rangeslider"> </div>
+</div>
+<div class="menu"></div>
+<script id="templ-menu" type="text/x-swig-template">
+	{% for item in menu %}
+	<div class="menu-item"> 
+		<div class="menu-item-title"> {{ item.title }}</div>
+		<div class="menu-item-price"> {{ item.price }}p</div>
+	</div>
+	{% endfor %}
+</script>
+
+<script> 
+var slider = new RangeSlider('.rangeslider', { start: [200, 500], range: [0, 600], onDrag: function() { renderMenu(); } });
+
+var sourceMenu = [
+        {title: 'Холодные вьетнамские роллы с креветками, манго и имбирём   ', price: 210},
+        {title: 'Креветка и овощи темпура    ', price: 220},
+        {title: 'Креветочные чипсы с острым соусом ', price: 50},
+        {title: 'Хрустящий кальмар с домашним соусом Чили  ', price:  240},
+        {title: 'Гедза с креветкой (6шт) ', price: 250},
+        {title: 'Гедза со свининой (6 шт.)   ', price: 190},
+        {title: 'Креветки васаби ', price: 280},
+        {title: 'Черные древесные грибы Чили, фризе, красный и зеленый лук  ', price: 110},
+        {title: 'Азиатские овощи обжаренные на воке с устричным соусом и чесноком'    , price: 160},
+        {title: 'Вьетнамские жареные немы с бараниной в рисовой бумаге с соусом нук чам '  , price: 165},
+        {title: 'Спринг-ролл с овощами подаются с соусом из чили и ананаса ', price: 130},
+        {title: 'Спринг-ролл с креветками с соусом из манго   ', price: 295},
+        {title: 'зеленая фасоль по-сычуаньски обжаренная на воке с чили и свининой '   , price: 190},
+        {title: 'Вьетнамский нем с курицей   ', price: 145},
+        {title: 'Спринг-ролл c уткой и соусом хой син    ', price: 265}
+    ].sort(function(a, b) {
+                return a.price - b.price;
+            });
+
+function renderMenu() {
+    var templ = $('#templ-menu').html();    
+    var filteredMenu = [];
+    var lowerBound = slider.value()[0];
+    var upperBound = slider.value()[1];
+    sourceMenu.forEach(function(element) {
+       if (lowerBound <= element.price && element.price <= upperBound) {
+           filteredMenu.push(element);
+       }
+    });
+    var content = swig.render(templ, {
+                locals: {
+                    menu: filteredMenu
+                }
+            });
+    $('.menu').html(content);
+}
+renderMenu();
+
+</script>
